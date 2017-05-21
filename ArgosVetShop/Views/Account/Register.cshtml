@@ -1,0 +1,62 @@
+﻿@model ArgosVetShop.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Registrarse";
+}
+
+<div class="container">
+    <div class="row">
+        <h5>@ViewBag.Title.</h5>
+    </div>
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <div class="card hoverable">
+                <div class="card-content">
+                    <div class="row">
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="col s12 m12 l12">
+                                <h4>Cree una cuenta nueva.</h4>
+                            </div>
+                            <hr />
+                            <div class="input-field col s12">
+                                @Html.LabelFor(m => m.User)
+                                @Html.TextBoxFor(m => m.User)
+                                @Html.ValidationMessageFor(m => m.User, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="input-field col s12">
+                                @Html.LabelFor(m => m.Email)
+                                @Html.TextBoxFor(m => m.Email)
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="input-field col s12">
+                                @Html.LabelFor(m => m.Password)
+                                @Html.PasswordFor(m => m.Password)
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="input-field col s12">
+                                @Html.LabelFor(m => m.ConfirmPassword)
+                                @Html.PasswordFor(m => m.ConfirmPassword)
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <input type="submit" value="Registrarse" class="right btn btn-default" />
+                                </div>
+                            </div>
+                            
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
