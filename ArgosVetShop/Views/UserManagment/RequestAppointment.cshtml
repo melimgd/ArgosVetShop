@@ -1,0 +1,106 @@
+﻿@model ArgosVetShop.ViewModels.AppointmentsViewModels.RequestAppointmentViewModel
+@{
+    ViewBag.Title = "RequestAppointment";
+}
+
+<section id="PetForm">
+    <div class="container">
+        <div class="row">
+            <h5>Request an Appointment</h5>
+        </div>
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="card hoverable">
+                    <div class="card-content">
+                        <div class="row">
+                            @using (Html.BeginForm("RequestAppointment", "UserManagment", FormMethod.Post, new { role = "form", @class = "col s12 m12 l12" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(m => m.petId)
+                                <div class="row">
+                                    <div class="col s12">
+                                        @Html.LabelFor(m => m.ServiceId)
+                                        @Html.DropDownListFor(m => m.ServiceId, Model.SelectItems)
+                                        @Html.ValidationMessageFor(m => m.ServiceId,"",new { @class="text-danger"})
+                                    </div>
+                                    <div id="price-tag" class="col s12">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s8">
+                                        @Html.LabelFor(m => m.Date)
+                                        @Html.TextBoxFor(m => m.Date, new { @class = "datepicker" })
+                                        @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col s4">
+                                        @Html.LabelFor(m => m.Hour)
+                                        @Html.DropDownListFor(m => m.Hour, Model.Hours)
+                                        @Html.ValidationMessageFor(m => m.Hour, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s4 offset-s8 ">
+                                        <button type="submit" class="btn waves-effect waves-light teal darken-3" value="AddPet">
+                                           REQUEST <i class="material-icons right">send</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $('#ServiceId').change(function () {
+                var serviceId = parseInt($(this).val());
+                switch (serviceId) {
+                    case 1:
+                        $('#price-tag').html('');
+                        $('#price-tag').html('<span class="bold">Price: </span> <span>$50.00</span>');
+                        break;
+                    case 2:
+                        $('#price-tag').html('');
+                        $('#price-tag').html('<span class="bold">Price: </span> <span>$230.00</span>');
+                        break;
+                    case 3:
+                        $('#price-tag').html('');
+                        $('#price-tag').html('<span class="bold">Price: </span> <span>$150.25</span>');
+                        break;
+                    case 4:
+                        $('#price-tag').html('');
+                        $('#price-tag').html('<span class="bold">Price: </span> <span>$100.25</span>');
+                        break;
+                    case 5:
+                        $('#price-tag').html('');
+                        $('#price-tag').html('<span class="bold">Price: </span> <span>$150.50</span>');
+                        break;
+                    default:
+                        $('#price-tag').html('');
+                }
+            });
+
+
+        });
+
+
+
+        if ('@ViewBag.Success') {
+            Materialize.toast('@ViewBag.Success', 3000, 'success')
+        } if ('@ViewBag.Failed') {
+            Materialize.toast('@ViewBag.Failed', 3000, 'danger')
+        } if ('@ViewBag.DateNotAvailable') {
+            Materialize.toast('@ViewBag.DateNotAvailable', 5000, 'warning')
+        } if ('@ViewBag.HourTaken') {
+            Materialize.toast('@ViewBag.HourTaken', 5000, 'warning')
+        }
+    </script>
+}

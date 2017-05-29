@@ -26,17 +26,17 @@
             <a class="brand-logo" href="@Url.Action("Index","Home")">
                 <img src="~/Content/img/text_logo.png" class="responsive-img custom-logo"/>
             </a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse black-text"><i class="material-icons">menu</i></a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse teal-text"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li>@Html.ActionLink("Home", "Index", "Home",null, new { @class ="pink-text bold"} )</li>
                 <li>@Html.ActionLink("About", "About", "Home",null, new { @class = "yellow-text bold" })</li>
                 <li>@Html.ActionLink("Contact", "Contact", "Home",null, new { @class = "orange-text bold" })</li>
-                @Html.Partial("_LoginPartial")
+                <li>@Html.Partial("_LoginPartial")<li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li>@Html.ActionLink("Home", "Index", "Home",null, new { @class = "black-text" })</li>
-                <li>@Html.ActionLink("About", "About", "Home",null, new { @class = "black-text" })</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home",null, new { @class = "black-text" })</li>
+                <li>@Html.ActionLink("Home", "Index", "Home",null, new { @class = "pink-text" })</li>
+                <li>@Html.ActionLink("About", "About", "Home",null, new { @class = "yellow-text" })</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home",null, new { @class = "orange-text" })</li>
                 @Html.Partial("_LoginPartial")
             </ul>
         </div>

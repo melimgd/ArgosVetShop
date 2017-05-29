@@ -65,14 +65,26 @@ namespace ArgosVetShop.ViewModels
     {
 
         [Required]
-        [Display(Name = "User")]
+        [Display(Name ="Name")]
+        public string Name { get; set; }
+        [Required]
+        [Display(Name ="Last Name")]
+        public string LastName { get; set; }
+
+        public string FullName { get { return Name + " " + LastName; } }
+
+        [RegularExpression(@"^\d+$", ErrorMessage ="Invalid phone format use only number no spaces or dashes")]
+        [StringLength(10, ErrorMessage ="Up to 10 digits")]
+        [Display(Name="Phone Number")]
+        public string PhoneNumber { get; set; }
+        [Required]
+        [Display(Name = "User Name")]
         public string User { get; set; }
 
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
         [Required]
         [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]

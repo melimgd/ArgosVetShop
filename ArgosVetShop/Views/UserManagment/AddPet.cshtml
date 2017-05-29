@@ -1,0 +1,102 @@
+﻿@model ArgosVetShop.ViewModels.ManagmentViewModels.PetViewModel
+@{
+    ViewBag.Title = "AddPet";
+}
+
+<section id="PetForm">
+    <div class="container">
+        <div class="row">
+            <h5>Suscribe your pet</h5>
+        </div>
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="card hoverable">
+                    <div class="card-content">
+                        <div class="row">
+                            @using (Html.BeginForm("AddPet","UserManagment",FormMethod.Post,new { role="form", enctype="multipart/form-data",@class="col s12 m12 l12" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="input-field col s12">
+                                    @Html.LabelFor(m => m.petName)
+                                    @Html.TextBoxFor(m => m.petName)
+                                    @Html.ValidationMessageFor(m => m.petName, "",new { @class="text-danger"})
+                                </div>
+                                <div class="input-field col s12">
+                                    @Html.LabelFor(m => m.petLastName)
+                                    @Html.TextBoxFor(m => m.petLastName)
+                                    @Html.ValidationMessageFor(m => m.petLastName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="input-field col s12">
+                                    @Html.LabelFor(m => m.petAge)
+                                    @Html.TextBoxFor(m => m.petAge)
+                                    @Html.ValidationMessageFor(m => m.petAge, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="input-field col s12">
+                                    @Html.LabelFor(m => m.petType)
+                                    @Html.TextBoxFor(m => m.petType)
+                                    @Html.ValidationMessageFor(m => m.petType,"", new { @class="text-danger"})
+                                </div>
+                                <div class="input-field col s12">
+                                    @Html.LabelFor(m => m.petBreed)
+                                    @Html.TextBoxFor(m => m.petBreed)
+                                    @Html.ValidationMessageFor(m => m.petBreed, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="input-field col s12">
+                                    @Html.LabelFor(m => m.petColor)
+                                    @Html.TextBoxFor(m => m.petColor)
+                                    @Html.ValidationMessageFor(m => m.petColor, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col s12">
+                                    
+                                        @Html.LabelFor(m => m.petGender)
+                                    <p>
+                                        @Html.RadioButton("petGender","Male",true,new{ @id="genderMale", @value="Male", @class="with-gap" })
+                                        <label for="genderMale">Male</label>
+                                    </p>
+                                    <p>
+                                        @Html.RadioButton("petGender", "Female",false, new { @id = "genderFemale", @value = "Female", @class = "with-gap" })
+                                        <label for="genderFemale">Female</label>
+                                    </p>
+                                </div>
+                                
+                                <div class="col s12">
+                                    <div class="file-field input-field">
+                                        <div class="btn teal darken-3">
+                                            <span>
+                                                Upload Photo
+                                            </span>
+                                            <input type="file" name="photo">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            @Html.TextBoxFor(m => m.petPhotoURL, new { @class = "file-path validate", @type = "text" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s4 offset-s8 ">
+                                        <button type="submit" class="btn waves-effect waves-light teal darken-3" value="AddPet">
+                                            SUSCRIBE <i class="material-icons right">send</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        if ('@ViewBag.Success') {
+            Materialize.toast('@ViewBag.Success', 3000, 'success')
+        } if ('@ViewBag.Failed') {
+            Materialize.toast('@ViewBag.Failed', 3000, 'danger')
+        }
+    </script>
+}
+

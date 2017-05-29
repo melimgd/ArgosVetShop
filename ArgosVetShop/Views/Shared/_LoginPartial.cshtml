@@ -4,10 +4,20 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right black-text" }))
     {
         @Html.AntiForgeryToken()
+        if (User.IsInRole("User"))
+        {
+            <li>
+                <a class="purple-text bold" href="@Url.Action("Managment","UserManagment")">@("Hola " + User.Identity.GetUserName())</a>
+            </li>
+        }
+        else if (User.IsInRole("Veterinarian"))
+        {
             <li>
                 <a class="purple-text bold">@("Hola " + User.Identity.GetUserName())</a>
             </li>
-            <li><a class="indigo-text bold" href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+        }
+
+        <li><a class="indigo-text bold" href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
     }
 }
 else

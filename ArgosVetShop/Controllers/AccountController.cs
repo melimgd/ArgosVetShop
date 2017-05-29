@@ -15,7 +15,7 @@ using System.Net;
 namespace ArgosVetShop.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -26,7 +26,7 @@ namespace ArgosVetShop.Controllers
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
-            UserManager = userManager;
+           // UserManager = userManager;
             SignInManager = signInManager;
         }
 
@@ -42,17 +42,17 @@ namespace ArgosVetShop.Controllers
             }
         }
 
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
+        //public  ApplicationUserManager UserManager
+        //{
+          //  get
+            //{
+              //  return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            //}
+            //private set
+            //{
+             //   _userManager = value;
+            //}
+        //}
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -103,10 +103,12 @@ namespace ArgosVetShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.User, Email = model.Email, IsEnabled = true };
+                var user = new ApplicationUser { UserName = model.User, Email = model.Email, IsEnabled = true, FullName = model.FullName, PhoneNumber = model.PhoneNumber };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "User");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // Para obtener más información sobre cómo habilitar la confirmación de cuenta y el restablecimiento de contraseña, visite http://go.microsoft.com/fwlink/?LinkID=320771

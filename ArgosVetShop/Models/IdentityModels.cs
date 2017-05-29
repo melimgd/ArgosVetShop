@@ -6,12 +6,17 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using System.ComponentModel.DataAnnotations;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace ArgosVetShop.Models
 {
     public class ApplicationUser : IdentityUser
     {
+
+        public string FullName { get; set; }
         public bool? IsEnabled { get; set; }
+        public virtual ICollection<PetModel> Pets { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Tenga en cuenta que el valor de authenticationType debe coincidir con el definido en CookieAuthenticationOptions.AuthenticationType
@@ -37,8 +42,11 @@ namespace ArgosVetShop.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        
 
+        public DbSet<AppointmentModel> Appointments { get; set; }
+        public DbSet<PetModel> Pets { get; set; }
+        public DbSet<ServiceModel> Services { get; set; }
+      
         public ApplicationDbContext()
             : base("ApplicationDbContext", throwIfV1Schema: false)
         {
@@ -53,7 +61,15 @@ namespace ArgosVetShop.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityUser>().ToTable("User");
+            modelBuilder.Entity<ApplicationUser>().ToTable("User");
+
+            modelBuilder.Entity<IdentityRole>().ToTable("Role");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
         }
     }
 

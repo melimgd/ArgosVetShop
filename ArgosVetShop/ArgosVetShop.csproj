@@ -211,20 +211,68 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserManagmentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705240543531_Initial_Migration.cs" />
+    <Compile Include="Migrations\201705240543531_Initial_Migration.Designer.cs">
+      <DependentUpon>201705240543531_Initial_Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705290018205_New_Fields_on_AppointmentModel.cs" />
+    <Compile Include="Migrations\201705290018205_New_Fields_on_AppointmentModel.Designer.cs">
+      <DependentUpon>201705290018205_New_Fields_on_AppointmentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705290322356_Date_Field_to_String_Type.cs" />
+    <Compile Include="Migrations\201705290322356_Date_Field_to_String_Type.Designer.cs">
+      <DependentUpon>201705290322356_Date_Field_to_String_Type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AppointmentModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PetModel.cs" />
+    <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\UserManagmentRepo.cs" />
+    <Compile Include="Services\UserManagmentService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\AppointmentsViewModels\RequestAppointmentViewModel.cs" />
+    <Compile Include="ViewModels\AppointmentsViewModels\ServiceViewModel.cs" />
+    <Compile Include="ViewModels\ManagmentPresentationViewModel.cs" />
+    <Compile Include="ViewModels\ManagmentViewModels\PetViewModel.cs" />
+    <Compile Include="ViewModels\ManagmentViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\materialize.css" />
+    <Content Include="Content\css\materialize.min.css" />
+    <Content Include="Content\css\owl.carousel.min.css" />
+    <Content Include="Content\css\owl.theme.default.min.css" />
+    <Content Include="Content\css\owl.theme.green.min.css" />
+    <Content Include="Content\img\assets\Arrow-Backward.png" />
+    <Content Include="Content\img\assets\Arrow-Forward.png" />
+    <Content Include="Content\img\assets\nophoto.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\pics\2017-Our-Best-Friends-Calendar.jpg" />
+    <Content Include="Content\img\pics\259.jpg" />
+    <Content Include="Content\img\pics\Cats-Dogs-Header-Image.jpg" />
+    <Content Include="Content\img\pics\ketunpet-banner-7.jpg" />
+    <Content Include="Content\img\pics\mans-best-friend-image-01-1300x700.jpg" />
+    <Content Include="Content\img\pics\maxresdefault.jpg" />
+    <Content Include="Content\img\pics\One-Night-With-Elvis-2016.jpg" />
+    <Content Include="Content\img\pics\shutterstock_166421999.jpg" />
+    <Content Include="Content\img\pics\v4.png" />
+    <Content Include="Content\img\text_logo.png" />
+    <Content Include="Content\js\materialize.js" />
+    <Content Include="Content\js\materialize.min.js" />
+    <Content Include="Content\js\owl.carousel.js" />
+    <Content Include="Content\js\owl.carousel.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -240,6 +288,26 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\fonts\roboto\Roboto-Bold.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Bold.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Bold.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Bold.woff2" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.woff2" />
+    <Content Include="Content\fonts\roboto\Roboto-Medium.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Medium.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Medium.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Medium.woff2" />
+    <Content Include="Content\fonts\roboto\Roboto-Regular.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Regular.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Regular.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Regular.woff2" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.woff2" />
     <None Include="Properties\PublishProfiles\ArgosVetShop - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -260,7 +328,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\scripts.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -280,9 +350,14 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\UserManagment\Managment.cshtml" />
+    <Content Include="Views\UserManagment\AddPet.cshtml" />
+    <Content Include="Views\UserManagment\EditPet.cshtml" />
+    <Content Include="Views\UserManagment\RequestAppointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\photos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -290,6 +365,17 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705240543531_Initial_Migration.resx">
+      <DependentUpon>201705240543531_Initial_Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705290018205_New_Fields_on_AppointmentModel.resx">
+      <DependentUpon>201705290018205_New_Fields_on_AppointmentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705290322356_Date_Field_to_String_Type.resx">
+      <DependentUpon>201705290322356_Date_Field_to_String_Type.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

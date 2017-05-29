@@ -1,0 +1,108 @@
+﻿@model ArgosVetShop.ViewModels.ManagmentPresentationViewModel
+@{
+    ViewBag.Title = "Managment";
+}
+
+<section id="UserManagment">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h2>Welcome! @Model.User.FullName</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12 l12 center">
+                <p class="bold">
+                    Now you can suscribe your pets to our system to make appointments and keep a record of every service
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row">
+                <div class="col s6 m8 l8">
+                    <h3 class="left no-margin">Your Pets</h3>
+                </div>
+                <div class="col s6 m4 l4">
+                    <a class="btn-floating btn-large waves-effect waves-light teal darken-3 right tooltipped" data-position="right" data-delay="50" data-tooltip="Suscribe Pet" href="@Url.Action("AddPet","UserManagment")"><i class="material-icons">add</i></a>
+                </div>
+            </div>
+            @if (Model.Pets.Any())
+            {
+                <div class="row">
+                    @foreach (var pet in Model.Pets)
+                    {
+                    <div class="col s12 m6 l6">
+                        <div class="card hoverable">
+                            <div class="card-image">
+                                @if (string.IsNullOrEmpty(@pet.petPhotoURL))
+                                {
+                                    <img class="respnsive-img" src="~/Content/img/assets/nophoto.png" />
+                                    <h5 class="card-title black-text">@pet.petName</h5>
+                                }
+                                else
+                                {
+                                    <img class="respnsive-img" src="@pet.petPhotoURL" />
+                                    <h5 class="card-title">@pet.petName</h5>
+                                }
+                               
+                                <a class="btn-floating btn-large halfway-fab waves-effect waves-light teal darken-3" href="@Url.Action("EditPet",new{ petId = pet.petId })"><i class="material-icons">edit</i></a>
+                            </div>
+                            <div class="card-content">
+                                <div class="row no-bottom-margin">
+                                    <div class="col s6 m6 l6 center">
+                                        <span class="bold">Age:</span>
+                                    </div>
+                                    <div class="col s6 m6 l6">
+                                        @pet.petAge
+                                    </div>
+                                </div>
+                                <div class="row no-bottom-margin">
+                                    <div class="col s6 m6 l6 center">
+                                        <span class="bold">Breed:</span>
+                                    </div>
+                                    <div class="col s6 m6 l6">
+                                        @pet.petBreed
+                                    </div>
+                                </div>
+
+                                <div class="row no-bottom-margin">
+                                    <div class="col s6 m6 l6 center">
+                                        <span class="bold">Type:</span>
+                                    </div>
+                                    <div class="col s6 m6 l6">
+                                        @pet.petType
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-action center">
+                                    <a class="bold teal-text text-darken-3" href="@Url.Action("PetRecord",new { petId = pet.petId})">RECORD</a>
+                                    <a class="bold teal-text text-darken-3" href="@Url.Action("RequestAppointment",new { petId = pet.petId })">REQUEST APPOINTMENT</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <h5>No Pets suscribed to our system push the add button to suscribe a pet</h5>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        if ('@ViewBag.Success') {
+            Materialize.toast('@ViewBag.Success', 3000, 'success')
+        } if ('@ViewBag.Failed') {
+            Materialize.toast('@ViewBag.Failed', 3000, 'danger')
+        }
+    </script>
+}
