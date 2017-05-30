@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using ArgosVetShop.Models;
+using ArgosVetShop.ViewModels.AppointmentsViewModels;
 
 namespace ArgosVetShop.ViewModels.ManagmentViewModels
 {
@@ -38,5 +40,7 @@ namespace ArgosVetShop.ViewModels.ManagmentViewModels
         public string OwnerId { get; set; }
         public bool IsMale { get { return string.Equals("Male", petGender); } }
         public bool IsFemale { get { return string.Equals("Female", petGender); } }
+
+        public ICollection<AppointmentViewModel> Appointments { get; internal set; }
     }
 }

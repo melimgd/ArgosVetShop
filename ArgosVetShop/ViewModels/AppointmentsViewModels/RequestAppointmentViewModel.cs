@@ -20,7 +20,7 @@ namespace ArgosVetShop.ViewModels.AppointmentsViewModels
         {
             get {
                 return new List<SelectListItem>() {
-                    new SelectListItem { Value = "", Text="Select your service" ,Selected = true, Disabled = true},
+                    new SelectListItem { Value = "0", Text="Select your service" ,Selected = true, Disabled = true},
                     new SelectListItem { Value = "1" , Text = "Veterinary consultation" },
                     new SelectListItem { Value = "2" , Text = "Haircut and Bath" },
                     new SelectListItem { Value = "3" , Text = "Haircut" },
@@ -38,7 +38,7 @@ namespace ArgosVetShop.ViewModels.AppointmentsViewModels
             {
                 if (string.IsNullOrEmpty(_date))
                 {
-                    return DateTime.Now.Date.ToString("d MMMM, yyyy");
+                    _date = DateTime.Now.Date.ToString("d MMMM, yyyy");
                 }
                 return _date;
             }
@@ -57,11 +57,11 @@ namespace ArgosVetShop.ViewModels.AppointmentsViewModels
             {
                 if (_hours == null)
                 {
-                    return new List<SelectListItem>()
+                    _hours = new List<SelectListItem>()
                     {
-                        new SelectListItem { Value = null, Text="Pick your hour", Disabled = true, Selected = true },
+                        new SelectListItem { Value = "", Text="Pick your hour", Disabled = true, Selected = true },
                         new SelectListItem { Value = "10:00AM",Text ="10:00am - 11:00am" },
-                        new SelectListItem { Value = "11:00AM",Text ="11:00am - 12:00am" },
+                        new SelectListItem { Value = "11:00AM",Text ="11:00am - 12:00pm" },
                         new SelectListItem { Value = "12:00AM",Text ="12:00pm - 1:00pm" },
                         new SelectListItem { Value = "3:00PM",Text ="3:00pm - 4:00pm" },
                         new SelectListItem { Value = "4:00PM",Text ="4:00pm - 5:00pm" },

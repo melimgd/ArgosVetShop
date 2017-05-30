@@ -108,7 +108,7 @@ namespace ArgosVetShop.Controllers
         [ValidateAntiForgeryToken()]
         public async Task<ActionResult> RequestAppointment(RequestAppointmentViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && viewModel.ServiceId > 0)
             {
                 var outCome = await UserService.RequestAppointment(viewModel);
                 if(outCome.GetType() == typeof(string))
@@ -133,6 +133,25 @@ namespace ArgosVetShop.Controllers
                     ViewBag.HourTaken = "The Hour has been already taken";
                     return View(updatedViewModel);
                 }
+            }
+            if(viewModel.ServiceId <= 0)
+            {
+                ViewBag.PickService = "Selection is needed";
+            }
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        [Authorize(Roles ="User")]
+        public async Task<ActionResult> PetRecord(int petId)
+        {
+            var viewModel = await UserService.GetPetInformation(petId);
+            if (!string.IsNullOrEmpty(viewModel.petPhotoURL))
+            {
+                var image = viewModel.petPhotoURL;
+                var userName = User.Identity.Name;
+                var route = UrlHelper.GenerateContentUrl("~/Content/img/photos/" + userName, HttpContext);
+                viewModel.petPhotoURL = Path.Combine(route, image);
             }
             return View(viewModel);
         }

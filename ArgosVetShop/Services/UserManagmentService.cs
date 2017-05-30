@@ -76,6 +76,27 @@ namespace ArgosVetShop.Services
                 petId = petId,
                 OwnerId =  petInformation.OwnerId
             };
+
+            petViewModel.Appointments = new List<AppointmentViewModel>();
+            if(petInformation.Appointments != null)
+            {
+                foreach (var appointment in petInformation.Appointments)
+                {
+                    var appointmentViewModel = new AppointmentViewModel
+                    {
+                        ServiceName = appointment.Service.ServiceName,
+                        ServicePrice = appointment.Service.Price,
+                        ServiceDescription = appointment.Service.ServiceDescription,
+                        Diagnostic = appointment.Diagnostic,
+                        Observations = appointment.Observations,
+                        Date = appointment.Date
+                    };
+
+                    petViewModel.Appointments.Add(appointmentViewModel);
+                }
+                
+            }
+            
             return petViewModel;
         }
 
@@ -129,6 +150,7 @@ namespace ArgosVetShop.Services
                     if (appointment.StartTime.Equals(viewModel.Hour))
                     {
                         isTaken = true;
+                        break;
                     }
                 }
                 if (isTaken)
@@ -139,7 +161,6 @@ namespace ArgosVetShop.Services
                         var remove = availableHours.Where(o => o.Value.Equals(appointment.StartTime)).FirstOrDefault();
                         availableHours.Remove(remove);
                     }
-                    viewModel.Hours = availableHours;
                     return viewModel;
                 }
                 else

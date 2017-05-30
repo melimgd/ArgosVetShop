@@ -15,6 +15,7 @@ namespace ArgosVetShop.Controllers
         private ApplicationDbContext _applicationDbContext = null;
         private ApplicationUserManager _userManager = null;
         private UserManagmentService _userService = null;
+        private VetManagmentService _vetService = null;
 
         protected ApplicationRoleManager RoleManager
         {
@@ -52,6 +53,19 @@ namespace ArgosVetShop.Controllers
                 }
                 _userService = new UserManagmentService(ApplicationDbContext,UserManager);
                 return _userService;
+            }
+        }
+
+        protected VetManagmentService VetService
+        {
+            get
+            {
+                if (_vetService != null)
+                {
+                    return _vetService;
+                }
+                _vetService = new VetManagmentService(ApplicationDbContext, UserManager);
+                return _vetService;
             }
         }
 

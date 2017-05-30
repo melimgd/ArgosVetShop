@@ -1,0 +1,91 @@
+﻿@model ArgosVetShop.ViewModels.ManagmentViewModels.PetViewModel
+@{
+    ViewBag.Title = "PetRecord";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <h5>@Model.petName Record</h5>
+        </div>
+        <div class="row">
+            <div class="col s12 m4 l4">
+                @if (string.IsNullOrEmpty(Model.petPhotoURL))
+                {
+                    <img class="responsive-img" src="~/Content/img/assets/nophoto.png" />
+                }
+                else
+                {
+                    <img class="responsive-img" src="@Model.petPhotoURL" />
+                }
+                
+            </div>
+            <div class="col s12 m8 l8">
+                <div class="row">
+                    <span class="bold">Breed: </span><span>@Model.petBreed</span>
+                </div>
+                <div class="row">
+                    <span class="bold">Color: </span><span>@Model.petColor</span>
+                </div>
+                <div class="row">
+                    <span class="bold">Gender: </span><span>@Model.petGender</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.Appointments.Any())
+            {
+                foreach(var appointment in Model.Appointments)
+                {
+                    <ul class="collapsible popout">
+                        <li>
+                            <div class="collapsible-header">
+                                <div class="col s6 m6 l6">
+                                    <span class="bold ">@appointment.ServiceName</span>
+                                </div>
+                                <div class="col s6 m6 l6 center">
+                                    <span class="bold right">@appointment.Date</span>
+                                </div>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <span class="bold">Description</span>
+                                    <p>@appointment.ServiceDescription</p>
+                                </div>
+                                
+                                <div class="row">
+                                    <span class="bold">Diagnostic</span>
+                                    @if (string.IsNullOrEmpty(appointment.Diagnostic))
+                                    {
+                                        <p>No information available</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@appointment.Diagnostic</p>
+                                    }
+                                    
+                                </div>
+                                <div class="row">
+                                    <span class="bold">Observations</span>
+                                    @if (string.IsNullOrEmpty(appointment.Observations))
+                                    {
+                                        <p>No information available</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@appointment.Observations</p>
+                                    }
+                                    
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <h5 class="center">There are no appointments records for @Model.petName</h5>
+            }
+        </div>
+    </div>
+</section>

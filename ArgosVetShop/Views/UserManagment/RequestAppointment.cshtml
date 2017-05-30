@@ -21,7 +21,7 @@
                                     <div class="col s12">
                                         @Html.LabelFor(m => m.ServiceId)
                                         @Html.DropDownListFor(m => m.ServiceId, Model.SelectItems)
-                                        @Html.ValidationMessageFor(m => m.ServiceId,"",new { @class="text-danger"})
+                                        <span class="text-danger">@ViewBag.PickService</span>
                                     </div>
                                     <div id="price-tag" class="col s12">
 

@@ -7,13 +7,13 @@
         if (User.IsInRole("User"))
         {
             <li>
-                <a class="purple-text bold" href="@Url.Action("Managment","UserManagment")">@("Hola " + User.Identity.GetUserName())</a>
+                <a class="purple-text bold" href="@Url.Action("Managment","UserManagment")">User Managment</a>
             </li>
         }
         else if (User.IsInRole("Veterinarian"))
         {
             <li>
-                <a class="purple-text bold">@("Hola " + User.Identity.GetUserName())</a>
+                <a class="purple-text bold" href="@Url.Action("AppointmentManagment","VetManagment")">Administration</a>
             </li>
         }
 
