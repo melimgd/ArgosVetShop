@@ -35,52 +35,54 @@
         <div class="row">
             @if (Model.Appointments.Any())
             {
-                foreach(var appointment in Model.Appointments)
-                {
-                    <ul class="collapsible popout">
-                        <li>
-                            <div class="collapsible-header">
-                                <div class="col s6 m6 l6">
-                                    <span class="bold ">@appointment.ServiceName</span>
-                                </div>
-                                <div class="col s6 m6 l6 center">
-                                    <span class="bold right">@appointment.Date</span>
-                                </div>
+                <ul class="collapsible popout">
+                    @foreach(var appointment in Model.Appointments)
+                    {
+
+                    <li>
+                        <div class="collapsible-header">
+                            <div class="col s6 m6 l6">
+                                <span class="bold ">@appointment.ServiceName</span>
                             </div>
-                            <div class="collapsible-body">
-                                <div class="row">
-                                    <span class="bold">Description</span>
-                                    <p>@appointment.ServiceDescription</p>
-                                </div>
-                                
-                                <div class="row">
-                                    <span class="bold">Diagnostic</span>
-                                    @if (string.IsNullOrEmpty(appointment.Diagnostic))
-                                    {
-                                        <p>No information available</p>
-                                    }
-                                    else
-                                    {
-                                        <p>@appointment.Diagnostic</p>
-                                    }
-                                    
-                                </div>
-                                <div class="row">
-                                    <span class="bold">Observations</span>
-                                    @if (string.IsNullOrEmpty(appointment.Observations))
-                                    {
-                                        <p>No information available</p>
-                                    }
-                                    else
-                                    {
-                                        <p>@appointment.Observations</p>
-                                    }
-                                    
-                                </div>
+                            <div class="col s6 m6 l6 center">
+                                <span class="bold right">@appointment.Date</span>
                             </div>
-                        </li>
-                    </ul>
-                }
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <span class="bold">Description</span>
+                                <p>@appointment.ServiceDescription</p>
+                            </div>
+
+                            <div class="row">
+                                <span class="bold">Diagnostic</span>
+                                @if (string.IsNullOrEmpty(appointment.Diagnostic))
+                                {
+                                    <p>No information available</p>
+                                }
+                                else
+                                {
+                                    <p>@appointment.Diagnostic</p>
+                                }
+
+                            </div>
+                            <div class="row">
+                                <span class="bold">Observations</span>
+                                @if (string.IsNullOrEmpty(appointment.Observations))
+                                {
+                                    <p>No information available</p>
+                                }
+                                else
+                                {
+                                    <p>@appointment.Observations</p>
+                                }
+
+                            </div>
+                        </div>
+                    </li>
+
+                    }
+                </ul>
             }
             else
             {

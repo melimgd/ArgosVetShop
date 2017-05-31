@@ -1,0 +1,47 @@
+﻿@model ArgosVetShop.ViewModels.AppointmentsViewModels.AddAppointmentInformationViewModel
+@{
+    ViewBag.Title = "AddInformation";
+}
+
+<section id="AppointmentInformationForm">
+    <div class="container">
+        <div class="row">
+            <h5>Add a Diagnostic and observation</h5>
+        </div>
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="card hoverable">
+                    <div class="card-content">
+                        <div class="row">
+                            @using (Html.BeginForm("AddInformation", "VetManagment", FormMethod.Post, new { role = "form", @class = "col s12 m12 l12" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(m => m.AppointmentId)
+                                <div class="input-field col s12">
+                                    @Html.LabelFor(m => m.Diagnostic)
+                                    @Html.TextAreaFor(m => m.Diagnostic,new { @class = "materialize-textarea" })
+                                    @Html.ValidationMessageFor(m => m.Diagnostic, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="input-field col s12">
+                                    @Html.LabelFor(m => m.Observation)
+                                    @Html.TextAreaFor(m => m.Observation,new { @class = "materialize-textarea"})
+                                    @Html.ValidationMessageFor(m => m.Observation, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="row">
+                                    <div class="col s4 offset-s8 ">
+                                        <button type="submit" class="btn waves-effect waves-light teal darken-3" value="AddPet">
+                                            SUBMIT <i class="material-icons right">send</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

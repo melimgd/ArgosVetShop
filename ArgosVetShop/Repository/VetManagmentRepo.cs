@@ -37,5 +37,16 @@ namespace ArgosVetShop.Repository
             var owner = await _userManager.FindByIdAsync(ownerId);
             return owner.UserName;
         }
+
+        public async Task<AppointmentModel> GetAppointmentById(int appointmentId)
+        {
+            return await _dbContext.Appointments.Where(a => a.AppoinmentID == appointmentId).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> UpdateAppointment(AppointmentModel originalModel)
+        {
+            var result = await _dbContext.SaveChangesAsync();
+            return result > 0;
+        }
     }
 }

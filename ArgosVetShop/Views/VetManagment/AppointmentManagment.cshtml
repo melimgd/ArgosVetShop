@@ -1,0 +1,326 @@
+﻿@model ArgosVetShop.ViewModels.ManagmentViewModels.VetManagmentViewModel
+
+<section id="appointment-manager">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h4>Welcome @User.Identity.Name!</h4>
+            </div>
+            <div class="col s12 m12 l12 center">
+                <p>You can manage your clients appointments from this page<p>
+            </div>
+            <div class="col s12 m12 l12">
+                <select>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">Today's Appointments</option>
+                    <option value="2">Future Appointments</option>
+                    <option value="3">Past Appointments</option>
+                </select>
+                <label>Appointment</label>
+            </div>
+        </div>
+        <div class="row">
+            <div id="today" class="card hoverable col s12 m12 l12">
+                <div class="card-title">
+                    <h5>Today's Appointments</h5>
+                </div>
+                <div class="card-content">
+                    <ul class="collapsible popout">
+                        @if (Model.TodayAppointments.Any())
+                        {
+                            foreach(var appointment in Model.TodayAppointments)
+                            {
+                                <li>
+                                    <div class="collapsible-header">
+                                        <div class="col s6 m6 l6">
+                                           <span class="bold ">@appointment.ServiceName</span>
+                                        </div>
+                                        <div class="col s6 m6 l6 center">
+                                            <span class="bold right">@appointment.Date - @appointment.StartTime</span>
+                                        </div>
+                                    </div>
+                                    <div class="collapsible-body">
+                                        <div class="row">
+                                            <div class="col s12 m5 l5">
+                                                @if (string.IsNullOrEmpty(appointment.Pet.petPhotoURL))
+                                                {
+                                                    <img class="responsive-img" src="~/Content/img/assets/nophoto.png" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="responsive-img" src="@appointment.Pet.petPhotoURL" />
+                                                }
+                                            </div>
+                                            <div class="col s12 m7 l7">
+                                                <div class="row">
+                                                    <span class="bold">Pet Name</span>
+                                                    <p>@appointment.Pet.petName</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Pet Breed</span>
+                                                    <p>@appointment.Pet.petBreed</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Pet Gender</span>
+                                                    <p>@appointment.Pet.petGender</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Service Description</span>
+                                                    <p>@appointment.ServiceDescription</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Service Price</span>
+                                                    <p>@appointment.ServicePrice</p>
+                                                </div>
+                                                @if (string.IsNullOrEmpty(appointment.Diagnostic))
+                                                {
+                                                    <div class="row">
+                                                        <a class="waves-effect waves-light btn teal darken-3" href="@Url.Action("AddInformation", new { appointmentId = appointment.AppointmentId })">ADD OBSERVATION</a>
+                                                    </div>
+                                                } 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <div class="collapsible-header">
+                                    <div class="col s6 m6 l6">
+                                        <span class="bold ">No Appointments</span>
+                                    </div>
+                                    <div class="col s6 m6 l6 center">
+                                        <span class="bold right"></span>
+                                    </div>
+                                </div>
+                                <div class="collapsible-body">
+                                    <div class="row center">
+                                        <h4>No Information available</h4>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div id="past" class="card hoverable col s12 m12 l12 hidden">
+                <div class="card-title">
+                    <h5>Past Appointments</h5>
+                </div>
+                <div class="card-content">
+                    <ul class="collapsible popout">
+                        @if (Model.PastAppointments.Any())
+                        {
+                            foreach (var appointment in Model.PastAppointments)
+                            {
+                                <li>
+                                    <div class="collapsible-header">
+                                        <div class="col s6 m6 l6">
+                                            <span class="bold ">@appointment.ServiceName</span>
+                                        </div>
+                                        <div class="col s6 m6 l6 center">
+                                            <span class="bold right">@appointment.Date - @appointment.StartTime</span>
+                                        </div>
+                                    </div>
+                                    <div class="collapsible-body">
+                                        <div class="row">
+                                            <div class="col s12 m5 l5">
+                                                @if (string.IsNullOrEmpty(appointment.Pet.petPhotoURL))
+                                                {
+                                                    <img class="responsive-img" src="~/Content/img/assets/nophoto.png" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="responsive-img" src="@appointment.Pet.petPhotoURL" />
+                                                }
+                                            </div>
+                                            <div class="col s12 m7 l7">
+                                                <div class="row">
+                                                    <span class="bold">Pet Name</span>
+                                                    <p>@appointment.Pet.petName</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Pet Breed</span>
+                                                    <p>@appointment.Pet.petBreed</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Pet Gender</span>
+                                                    <p>@appointment.Pet.petGender</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Service Description</span>
+                                                    <p>@appointment.ServiceDescription</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Service Price</span>
+                                                    <p>@appointment.ServicePrice</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <div class="collapsible-header">
+                                    <div class="col s6 m6 l6">
+                                        <span class="bold ">No Appointments</span>
+                                    </div>
+                                    <div class="col s6 m6 l6 center">
+                                        <span class="bold right"></span>
+                                    </div>
+                                </div>
+                                <div class="collapsible-body">
+                                    <div class="row center">
+                                        <h4>No Information available</h4>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div id="future" class="card hoverable col s12 m12 l12 hidden">
+                <div class="card-title">
+                    <h5>Future Appointments</h5>
+                </div>
+                <div class="card-content">
+                    <ul class="collapsible popout">
+                        @if (Model.FutureAppoitments.Any())
+                        {
+                            foreach (var appointment in Model.FutureAppoitments)
+                            {
+                                <li>
+                                    <div class="collapsible-header">
+                                        <div class="col s6 m6 l6">
+                                            <span class="bold ">@appointment.ServiceName</span>
+                                        </div>
+                                        <div class="col s6 m6 l6 center">
+                                            <span class="bold right">@appointment.Date - @appointment.StartTime</span>
+                                        </div>
+                                    </div>
+                                    <div class="collapsible-body">
+                                        <div class="row">
+                                            <div class="col s12 m5 l5">
+                                                @if (string.IsNullOrEmpty(appointment.Pet.petPhotoURL))
+                                                {
+                                                    <img class="responsive-img" src="~/Content/img/assets/nophoto.png" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="responsive-img" src="@appointment.Pet.petPhotoURL" />
+                                                }
+                                            </div>
+                                            <div class="col s12 m7 l7">
+                                                <div class="row">
+                                                    <span class="bold">Pet Name</span>
+                                                    <p>@appointment.Pet.petName</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Pet Breed</span>
+                                                    <p>@appointment.Pet.petBreed</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Pet Gender</span>
+                                                    <p>@appointment.Pet.petGender</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Service Description</span>
+                                                    <p>@appointment.ServiceDescription</p>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="bold">Service Price</span>
+                                                    <p>@appointment.ServicePrice</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <div class="collapsible-header">
+                                    <div class="col s6 m6 l6">
+                                        <span class="bold ">No Appointments</span>
+                                    </div>
+                                    <div class="col s6 m6 l6 center">
+                                        <span class="bold right"></span>
+                                    </div>
+                                </div>
+                                <div class="collapsible-body">
+                                    <div class="row center">
+                                        <h4>No Information available</h4>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        if ('@ViewBag.Success') {
+            Materialize.toast('@ViewBag.Success', 3000, 'success')
+        } if ('@ViewBag.Failed') {
+            Materialize.toast('@ViewBag.Failed', 3000, 'danger')
+        }
+        $(function () {
+            $('select').change(function () {
+                var value = parseInt($(this).val());
+                switch (value) {
+                    case 1:
+                        var selector = $('#today');
+                        if (selector.hasClass('hidden')) {
+                            selector.removeClass('hidden');
+                        }
+                        if (!$('#past').hasClass('hidden')) {
+                            $('#past').addClass('hidden');
+                        }
+                        if (!$('#future').hasClass('hidden')) {
+                            $('#future').addClass('hidden');
+                        }
+                        break;
+                    case 2:
+                        var selector = $('#future');
+                        if (selector.hasClass('hidden')) {
+                            selector.removeClass('hidden');
+                        }
+                        if (!$('#past').hasClass('hidden')) {
+                            $('#past').addClass('hidden');
+                        }
+                        if (!$('#today').hasClass('hidden')) {
+                            $('#today').addClass('hidden');
+                        }
+                        break;
+                    case 3:
+                        var selector = $('#past');
+                        if (selector.hasClass('hidden')) {
+                            selector.removeClass('hidden');
+                        }
+                        if (!$('#today').hasClass('hidden')) {
+                            $('#today').addClass('hidden');
+                        }
+                        if (!$('#future').hasClass('hidden')) {
+                            $('#future').addClass('hidden');
+                        }
+                        break;
+                    default:
+
+                }
+            });
+        });
+    </script>
+}

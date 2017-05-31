@@ -18,5 +18,7 @@ namespace ArgosVetShop.ViewModels.AppointmentsViewModels
         public PetViewModel Pet { get; set; }
         public string OwnerId { get; internal set; }
         public object OwnerUserName { get; internal set; }
+        public string StartTime { get; internal set; }
+        public int AppointmentId { get; internal set; }
     }
 }

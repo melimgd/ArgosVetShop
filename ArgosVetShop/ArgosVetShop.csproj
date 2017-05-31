@@ -242,12 +242,14 @@
     <Compile Include="Services\VetManagmentService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\AppointmentsViewModels\AddAppointmentInformationViewModel.cs" />
     <Compile Include="ViewModels\AppointmentsViewModels\AppointmentViewModel.cs" />
     <Compile Include="ViewModels\AppointmentsViewModels\RequestAppointmentViewModel.cs" />
     <Compile Include="ViewModels\AppointmentsViewModels\ServiceViewModel.cs" />
     <Compile Include="ViewModels\ManagmentPresentationViewModel.cs" />
     <Compile Include="ViewModels\ManagmentViewModels\PetViewModel.cs" />
     <Compile Include="ViewModels\ManagmentViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\ManagmentViewModels\VetManagmentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -363,6 +365,8 @@
     <Content Include="Views\UserManagment\EditPet.cshtml" />
     <Content Include="Views\UserManagment\RequestAppointment.cshtml" />
     <Content Include="Views\UserManagment\PetRecord.cshtml" />
+    <Content Include="Views\VetManagment\AppointmentManagment.cshtml" />
+    <Content Include="Views\VetManagment\AddInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
